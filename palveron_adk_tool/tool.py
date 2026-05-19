@@ -130,7 +130,7 @@ class PalveronGovernanceTool:
             return self._adk_tool
 
         try:
-            from google.adk.tools import FunctionTool  # type: ignore[import-not-found]
+            from google.adk.tools import FunctionTool
         except ImportError as exc:
             raise ImportError(
                 "PalveronGovernanceTool.as_tool() requires google-adk: "
@@ -176,7 +176,7 @@ class PalveronGovernanceTool:
         if self._client is not None:
             return self._client
         try:
-            from palveron import Palveron  # type: ignore[import-not-found]
+            from palveron import Palveron
         except ImportError as exc:
             raise ImportError(
                 "PalveronGovernanceTool requires palveron-sdk: "
@@ -191,7 +191,7 @@ class PalveronGovernanceTool:
 
     def _build_request(self, content: str, metadata: dict[str, Any]) -> Any:
         try:
-            from palveron import VerifyRequest  # type: ignore[import-not-found]
+            from palveron import VerifyRequest
         except ImportError as exc:
             raise ImportError(
                 "PalveronGovernanceTool requires palveron-sdk: "
@@ -217,7 +217,7 @@ class PalveronGovernanceTool:
                 attestation.get("status") if isinstance(attestation, dict) else None
             )
             if isinstance(status, str) and status in ("PENDING", "ANCHORED", "DISABLED"):
-                attestation_status = status  # type: ignore[assignment]
+                attestation_status = status
 
         return GovernanceResult(
             decision=decision,  # type: ignore[arg-type]
