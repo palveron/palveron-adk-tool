@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import pytest
+from pydantic import ValidationError
 
 from palveron_adk_tool import GovernanceConfig, GovernanceResult
 
@@ -18,12 +19,12 @@ def test_governance_config_defaults() -> None:
 
 def test_governance_config_is_frozen() -> None:
     cfg = GovernanceConfig(api_key="pv_test_xyz")
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         cfg.api_key = "other"  # type: ignore[misc]
 
 
 def test_governance_config_rejects_unknown_fields() -> None:
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         GovernanceConfig(api_key="pv_test_xyz", unknown_field=True)  # type: ignore[call-arg]
 
 
@@ -74,5 +75,5 @@ def test_result_attestation_status_default() -> None:
 
 
 def test_result_rejects_unknown_decision() -> None:
-    with pytest.raises(Exception):
+    with pytest.raises(ValidationError):
         GovernanceResult(decision="MAYBE", trace_id="tr_7")  # type: ignore[arg-type]

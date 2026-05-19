@@ -34,7 +34,7 @@ into a typed :class:`~palveron_adk_tool.models.GovernanceResult`.
 from __future__ import annotations
 
 import logging
-from typing import Any, Optional
+from typing import Any
 
 from .models import GovernanceConfig, GovernanceResult
 
@@ -92,7 +92,7 @@ class PalveronGovernanceTool:
         self,
         content: str,
         *,
-        metadata: Optional[dict[str, Any]] = None,
+        metadata: dict[str, Any] | None = None,
     ) -> GovernanceResult:
         """Verify ``content`` against the configured Palveron policy bundle.
 

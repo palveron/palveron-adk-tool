@@ -9,7 +9,7 @@ gateway.
 
 from __future__ import annotations
 
-from typing import Any, Literal, Optional
+from typing import Any, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
 
@@ -62,7 +62,7 @@ class GovernanceConfig(BaseModel):
         gt=0.0,
         description="HTTP timeout for the /api/v1/verify call.",
     )
-    agent_id: Optional[str] = Field(
+    agent_id: str | None = Field(
         default=None,
         description="Stable identifier for the agent that scopes traces and per-agent policy bundles.",
     )
@@ -96,11 +96,11 @@ class GovernanceResult(BaseModel):
         ...,
         description="Stable trace identifier. Use for audit lookup and human-review routing.",
     )
-    modified_content: Optional[str] = Field(
+    modified_content: str | None = Field(
         default=None,
         description="Present when decision == 'MODIFY'. Redacted text to use in place of the original prompt.",
     )
-    reason: Optional[str] = Field(
+    reason: str | None = Field(
         default=None,
         description="Short human-readable reason. Use for logging only; never feed back into the model as instruction.",
     )
@@ -110,7 +110,11 @@ class GovernanceResult(BaseModel):
     )
     attestation_status: AttestationStatus = Field(
         default="PENDING",
-        description="ANCHORED once the trace is on-chain; PENDING during the 30-60s batching window; DISABLED if the project opts out.",
+        description=(
+            "ANCHORED once the trace is on-chain; "
+            "PENDING during the 30-60s batching window; "
+            "DISABLED if the project opts out."
+        ),
     )
 
     @property

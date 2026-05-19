@@ -16,7 +16,6 @@ import pytest
 
 from palveron_adk_tool import GovernanceConfig, PalveronGovernanceTool
 
-
 # ── A minimal in-memory stand-in for the palveron-sdk surface ────────────
 
 
