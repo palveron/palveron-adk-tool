@@ -130,7 +130,11 @@ class PalveronGovernanceTool:
             return self._adk_tool
 
         try:
-            from google.adk.tools import FunctionTool
+            # google-adk does not list ``FunctionTool`` in its public ``__all__``,
+            # so mypy reports ``attr-defined`` when the package is installed.
+            # The ``unused-ignore`` code keeps this clean when google-adk is
+            # absent and ``ignore_missing_imports`` makes the import ``Any``.
+            from google.adk.tools import FunctionTool  # type: ignore[attr-defined, unused-ignore]
         except ImportError as exc:
             raise ImportError(
                 "PalveronGovernanceTool.as_tool() requires google-adk: "
