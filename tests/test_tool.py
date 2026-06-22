@@ -77,7 +77,7 @@ def _install_fake_palveron(monkeypatch: pytest.MonkeyPatch) -> None:
 
 def _config(**overrides: Any) -> GovernanceConfig:
     base: dict[str, Any] = {
-        "api_key": "pv_test_xyz",
+        "api_key": "pv_live_xyz",
         "agent_id": "a-1",
         "metadata": {"source": "flare-ai-kit", "protocol": "sparkdex"},
     }

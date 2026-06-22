@@ -43,7 +43,7 @@ class GovernanceConfig(BaseModel):
 
     api_key: str = Field(
         ...,
-        description="Palveron API key (pv_live_... or pv_test_...). Load from a secret manager; never hardcode.",
+        description="Palveron API key (pv_live_...). Load from a secret manager; never hardcode.",
     )
     base_url: str = Field(
         default="https://gateway.palveron.com",

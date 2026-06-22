@@ -9,7 +9,7 @@ from palveron_adk_tool import GovernanceConfig, GovernanceResult
 
 
 def test_governance_config_defaults() -> None:
-    cfg = GovernanceConfig(api_key="pv_test_xyz")
+    cfg = GovernanceConfig(api_key="pv_live_xyz")
     assert cfg.base_url == "https://gateway.palveron.com"
     assert cfg.fail_open is True
     assert cfg.timeout_seconds == 5.0
@@ -18,19 +18,19 @@ def test_governance_config_defaults() -> None:
 
 
 def test_governance_config_is_frozen() -> None:
-    cfg = GovernanceConfig(api_key="pv_test_xyz")
+    cfg = GovernanceConfig(api_key="pv_live_xyz")
     with pytest.raises(ValidationError):
         cfg.api_key = "other"  # type: ignore[misc]
 
 
 def test_governance_config_rejects_unknown_fields() -> None:
     with pytest.raises(ValidationError):
-        GovernanceConfig(api_key="pv_test_xyz", unknown_field=True)  # type: ignore[call-arg]
+        GovernanceConfig(api_key="pv_live_xyz", unknown_field=True)  # type: ignore[call-arg]
 
 
 def test_governance_config_metadata_roundtrip() -> None:
     cfg = GovernanceConfig(
-        api_key="pv_test_xyz",
+        api_key="pv_live_xyz",
         agent_id="a-1",
         metadata={"source": "flare-ai-kit", "protocol": "sparkdex"},
     )
